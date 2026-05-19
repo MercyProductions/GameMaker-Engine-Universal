@@ -141,6 +141,18 @@ Unknown
 
 The backend is inferred from loaded modules such as `d3d12.dll`, `d3d11.dll`, `dxgi.dll`, `d3d9.dll`, `d3dx9_43.dll`, and `opengl32.dll`.
 
+## Internal ImGui Overlay
+
+The DLL now owns an in-process ImGui diagnostics menu. On load it starts an internal render bridge and attempts backend setup in this order:
+
+```text
+Direct3D11 Present
+Direct3D9 EndScene
+OpenGL SwapBuffers
+```
+
+Press `F4` to show or hide the menu. The menu includes runtime status, renderer status, adapter capability checks, instance/provider timing, and overlay toggles for boxes, corner boxes, filled boxes, lines, and labels. D3D12 is still detected and reported clearly, but this build does not render ImGui through that backend yet.
+
 ## Build
 
 Many GameMaker runners are 32-bit, while some newer exports are x64, so the project supports both.
